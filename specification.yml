@@ -1,0 +1,47 @@
+# specification.yml
+openapi: "3.0.0"
+
+info:
+  title: Sample API
+  description: API demonstrating how to check for optional parameters.
+  version: "0.1"
+
+paths:
+  /employee:
+    get:
+      summary: Gets Employees that match query parameters.
+      operationId: library.employee.search
+      parameters:
+        - in: query
+          name: join_date
+          schema:
+            type: string
+            format: date
+          required: false
+          description: Filters employees for a particular date that they joined the company.
+        - in: query
+          name: business_unit
+          schema:
+            type: string
+          required: false
+          description: Filters employees for a particular business unit.
+        - in: query
+          name: city
+          schema:
+            type: string
+          required: false
+          description: Filters employees for which city they are working in.
+      responses:
+        200:
+          description: Returns all the Employees in the database that match the query parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  first_name:
+                    description: The first name of the Employee.
+                    type: string
+                  last_name:
+                    description: The last name of the Employee.
+                    type: string
